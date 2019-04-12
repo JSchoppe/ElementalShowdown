@@ -11,7 +11,6 @@ public class Projectile : MonoBehaviour
 
     private Vector2 startingLocation;
 
-    private float Range = 5;
     private float Damage = .1f;
     private Element Elemental = Element.Fire;
 
@@ -19,13 +18,22 @@ public class Projectile : MonoBehaviour
     private SpriteRenderer ProjectileImage;
 
 
-    public void SetProperties(float range, Vector2 velocity, Element element, float damage)
+    public void SetProperties(int owningPlayer, Vector2 velocity, Element element, float damage)
     {
-        Range = range;
+        switch (owningPlayer)
+        {
+            case 1:
+                gameObject.layer = 10;
+                break;
+            case 2:
+                gameObject.layer = 11;
+                break;
+        }
+
         Elemental = element;
         Damage = damage;
 
-        gameObject.GetComponent<Rigidbody>().velocity = velocity;
+        gameObject.GetComponent<Rigidbody2D>().velocity = velocity;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -36,7 +44,7 @@ public class Projectile : MonoBehaviour
         //}
         //else
         //{
-            Destroy(this);
+            Destroy(gameObject);
         //}
     }
 
@@ -49,9 +57,10 @@ public class Projectile : MonoBehaviour
     private void FixedUpdate()
     {
         // Projectile is outside of its designated range.
-        if (Vector2.Distance(transform.position, startingLocation) > Range)
-        {
-            Destroy(this);
-        }
+        //if (Vector2.Distance(transform.position, startingLocation) > Range)
+        //{
+        //    Debug.Log("Destroyed");
+        //    Destroy(gameObject);
+        //}
     }
 }

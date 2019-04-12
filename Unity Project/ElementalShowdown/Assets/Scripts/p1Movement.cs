@@ -12,6 +12,10 @@ public class p1Movement : MonoBehaviour
     Rigidbody2D playerRB;
     [SerializeField]
     Transform childSprite;
+    [SerializeField]
+    private GameObject projectilePrefab;
+    [SerializeField]
+    private Transform gunTarget;
 
     // Start is called before the first frame update
     void Start()
@@ -24,14 +28,12 @@ public class p1Movement : MonoBehaviour
     {
         Vector2 playerInput = new Vector2(Input.GetAxis("P1-Horizontal"), Input.GetAxis("P1-Vertical"));
         Vector2 rotInput = new Vector2(Input.GetAxis("P1-Horizontal2"), Input.GetAxis("P1-Vertical2"));
-        Debug.Log(rotInput);
 
-        // player 1 movement
         playerRB.velocity = playerInput * movementSpeed;
 
         if (rotInput.y == 0)
         {
-            if(rotInput.x == 0)
+            if (rotInput.x == 0)
             {
                 // do nothing
             }
@@ -77,6 +79,22 @@ public class p1Movement : MonoBehaviour
                 childSprite.transform.eulerAngles = new Vector3(0, 0, 270 - (180 / Mathf.PI) * Mathf.Atan(rotInput.y / -rotInput.x));
             }
         }
-        playerRB.velocity = new Vector2(Input.GetAxis("P1-Horizontal"), Input.GetAxis("P1-Vertical")) * movementSpeed;
+
+        if (Input.GetAxis("P1-Trigger") < -.2)
+        {
+            if (!onpress)
+            {
+                Projectile newProjectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity).GetComponent<Projectile>();
+
+                newProjectile.SetProperties(1, 15 * (gunTarget.position - transform.position), Element.Fire, 10);
+            }
+            onpress = true;
+        }
+        else
+        {
+            onpress = false;
+        }
     }
+    bool onpress = false;
+
 }
