@@ -22,8 +22,8 @@ public class p1Movement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector2 playerInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        Vector2 rotInput = new Vector2(Input.GetAxis("Horizontal2"), Input.GetAxis("Vertical2"));
+        Vector2 playerInput = new Vector2(Input.GetAxis("P1-Horizontal"), Input.GetAxis("P1-Vertical"));
+        Vector2 rotInput = new Vector2(Input.GetAxis("P1-Horizontal2"), Input.GetAxis("P1-Vertical2"));
         Debug.Log(rotInput);
 
         // player 1 movement
@@ -77,6 +77,6 @@ public class p1Movement : MonoBehaviour
                 childSprite.transform.eulerAngles = new Vector3(0, 0, 270 - (180 / Mathf.PI) * Mathf.Atan(rotInput.y / -rotInput.x));
             }
         }
-        playerRB.velocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * movementSpeed;
+        playerRB.velocity = new Vector2(Input.GetAxis("P1-Horizontal"), Input.GetAxis("P1-Vertical")) * movementSpeed;
     }
 }
