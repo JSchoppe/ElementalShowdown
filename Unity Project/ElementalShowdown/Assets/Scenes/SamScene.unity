@@ -222,7 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dabde841642c68340ad3701bd7eb6364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 3
+  movementSpeed: 8
   rotationSpeed: 0
   playerRB: {fileID: 552813974}
   childSprite: {fileID: 2086410968}
