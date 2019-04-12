@@ -31,26 +31,26 @@ public class PlayerMeter : MonoBehaviour
 
 
     //Debug:
-    int currentWand = 100;
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            currentWand--;
-            if (currentWand < 0)
-            {
-                currentWand = 0;
-            }
-            UpdateHealth(currentWand / 100f);
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            currentWand++;
-            if (currentWand > 100)
-            {
-                currentWand = 100;
-            }
-            UpdateHealth(currentWand / 100f);
-        }
-    }
+    //int currentWand = 100;
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.LeftArrow))
+    //    {
+    //        currentWand--;
+    //        if (currentWand < 0)
+    //        {
+    //            currentWand = 0;
+    //        }
+    //        UpdateHealth(currentWand / 100f);
+    //    }
+    //    else if (Input.GetKeyDown(KeyCode.RightArrow))
+    //    {
+    //        currentWand++;
+    //        if (currentWand > 100)
+    //        {
+    //            currentWand = 100;
+    //        }
+    //        UpdateHealth(currentWand / 100f);
+    //    }
+    //}
 }
