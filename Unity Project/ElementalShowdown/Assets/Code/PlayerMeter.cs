@@ -6,34 +6,21 @@ using UnityEngine.UI;
 public class PlayerMeter : MonoBehaviour
 {
     [SerializeField]
-    private Texture fullWand;
+    private RawImage meterFill;
     [SerializeField]
-    private Texture drainedWand;
-
+    private RawImage background;
     [SerializeField]
-    private Slider healthSlider;
-    [SerializeField]
-    private RawImage[] wandCharges;
+    private Texture[] wandFills;
 
 
     public void UpdateWandCharges(int newCharges)
     {
-        for (int i = 0; i < wandCharges.Length; i++)
-        {
-            if (i < newCharges) // This charge is filled.
-            {
-                wandCharges[i].texture = fullWand;
-            }
-            else
-            {
-                wandCharges[i].texture = drainedWand;
-            }
-        }
+        background.texture = wandFills[newCharges];
     }
 
     public void UpdateHealth(float newHealth)
     {
-        healthSlider.value = newHealth;
+        meterFill.rectTransform.localScale = new Vector3(newHealth, 1, 1);
     }
 
     // Start is called before the first frame update
@@ -43,26 +30,27 @@ public class PlayerMeter : MonoBehaviour
     }
 
 
-    // Debug:
-    //int currentWand;
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.LeftArrow))
-    //    {
-    //        currentWand--;
-    //        if(currentWand < 0)
-    //        {
-    //            currentWand = 0;
-    //        }
-    //    }
-    //    else if (Input.GetKeyDown(KeyCode.RightArrow))
-    //    {
-    //        currentWand++;
-    //        if (currentWand > 5)
-    //        {
-    //            currentWand = 5;
-    //        }
-    //    }
-    //    UpdateWandCharges(currentWand);
-    //}
+    //Debug:
+    int currentWand = 100;
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            currentWand--;
+            if (currentWand < 0)
+            {
+                currentWand = 0;
+            }
+            UpdateHealth(currentWand / 100f);
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            currentWand++;
+            if (currentWand > 100)
+            {
+                currentWand = 100;
+            }
+            UpdateHealth(currentWand / 100f);
+        }
+    }
 }
