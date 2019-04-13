@@ -13,6 +13,17 @@ public class GameplayLogic : MonoBehaviour
     private Sprite lightning;
 
 
+    [SerializeField]
+    private Sprite fireShard;
+    [SerializeField]
+    private Sprite iceShard;
+    [SerializeField]
+    private Sprite lightningShard;
+
+    public static Sprite FireShard;
+    public static Sprite IceShard;
+    public static Sprite LightningShard;
+
     public static Sprite Fire;
     public static Sprite Ice;
     public static Sprite Lightning;
@@ -38,6 +49,10 @@ public class GameplayLogic : MonoBehaviour
         Lightning = lightning;
         pickup = pickupPrefab;
         locations = locationsToSpawn;
+
+        FireShard = fireShard;
+        IceShard = iceShard;
+        LightningShard = lightningShard;
     }
 
     // Start is called before the first frame update
@@ -50,6 +65,8 @@ public class GameplayLogic : MonoBehaviour
             SpawnPiece(Element.Ice);
             SpawnPiece(Element.Lightning);
         }
+
+        Startup.ChangeAudioTrack(Startup.Track.Game);
     }
 
     public static void DamagePlayer(int player, float amount)

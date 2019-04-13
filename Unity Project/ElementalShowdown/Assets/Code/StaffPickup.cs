@@ -19,13 +19,13 @@ public class StaffPickup : MonoBehaviour
             switch (value)
             {
                 case Element.Fire:
-                    renderer.sprite = GameplayLogic.Fire;
+                    renderer.sprite = GameplayLogic.FireShard;
                     break;
                 case Element.Ice:
-                    renderer.sprite = GameplayLogic.Ice;
+                    renderer.sprite = GameplayLogic.IceShard;
                     break;
                 case Element.Lightning:
-                    renderer.sprite = GameplayLogic.Lightning;
+                    renderer.sprite = GameplayLogic.LightningShard;
                     break;
 
             }
