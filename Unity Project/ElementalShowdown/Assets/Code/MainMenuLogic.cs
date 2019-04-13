@@ -18,21 +18,21 @@ public class MainMenuLogic : MonoBehaviour
     {
         Startup.ChangeAudioTrack(Startup.Track.Main);
 
-        startButton.onClick.AddListener(startClick);
-        instructButton.onClick.AddListener(startClick);
-        creditsButton.onClick.AddListener(startClick);
+        //startButton.onClick.AddListener(startClick);
+        //instructButton.onClick.AddListener(instructClick);
+        //creditsButton.onClick.AddListener(creditsClick);
     }
 
 
-    void startClick()
+    public void startClick()
     {
         SceneManager.LoadScene("SamScene", LoadSceneMode.Single);
     }
-    void instructClick()
+    public void instructClick()
     {
         SceneManager.LoadScene("Instructions", LoadSceneMode.Single);
     }
-    void creditsClick()
+    public void creditsClick()
     {
         SceneManager.LoadScene("Credits", LoadSceneMode.Single);
     }

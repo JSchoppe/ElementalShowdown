@@ -52,5 +52,6 @@ public class Startup : MonoBehaviour
                 AudioPlayer.clip = EndTrack;
                 break;
         }
+        AudioPlayer.Play();
     }
 }
