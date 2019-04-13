@@ -12,6 +12,11 @@ public class GameplayLogic : MonoBehaviour
     [SerializeField]
     private Sprite lightning;
 
+    [SerializeField]
+    private SpriteRenderer bgRenderer;
+    [SerializeField]
+    private Sprite[] backgrounds;
+
 
     [SerializeField]
     private Sprite fireShard;
@@ -64,6 +69,10 @@ public class GameplayLogic : MonoBehaviour
         FireShard = fireShard;
         IceShard = iceShard;
         LightningShard = lightningShard;
+
+        playerHealths = new float[]{ 1, 1 };
+
+        bgRenderer.sprite = backgrounds[Random.Range(0, backgrounds.Length)];
     }
 
     int lastCountP1 = 0;
@@ -128,10 +137,12 @@ public class GameplayLogic : MonoBehaviour
         {
             if (player == 1)
             {
+                Startup.ChangeAudioTrack(Startup.Track.Victory);
                 UnityEngine.SceneManagement.SceneManager.LoadScene("End Screen", UnityEngine.SceneManagement.LoadSceneMode.Single);
             }
             else if (player == 2)
             {
+                Startup.ChangeAudioTrack(Startup.Track.Victory);
                 UnityEngine.SceneManagement.SceneManager.LoadScene("End Screen 2", UnityEngine.SceneManagement.LoadSceneMode.Single);
             }
         }

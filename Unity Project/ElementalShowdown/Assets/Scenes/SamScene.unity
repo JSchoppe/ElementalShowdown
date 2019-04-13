@@ -1281,6 +1281,11 @@ MonoBehaviour:
   fire: {fileID: 21300000, guid: 67bbbfb680312dc4cab78db7cd024b5f, type: 3}
   ice: {fileID: 21300000, guid: e743d11dd2b58524290117419af1b86c, type: 3}
   lightning: {fileID: 21300000, guid: ccf529b31a30e8d45883a3898328aca9, type: 3}
+  bgRenderer: {fileID: 1372621673}
+  backgrounds:
+  - {fileID: 21300000, guid: 858a0e8d8e3f0cd4788d27393b6db7a9, type: 3}
+  - {fileID: 21300000, guid: f7233a6415abe1f498eb18625dd3007e, type: 3}
+  - {fileID: 21300000, guid: e2c9680d1b9aa5443bfbb33284679985, type: 3}
   fireShard: {fileID: 21300000, guid: b4534563ef824f546b3984cca4f93634, type: 3}
   iceShard: {fileID: 21300000, guid: 05d49f4e0ecbb184dbaa0151145e3f77, type: 3}
   lightningShard: {fileID: 21300000, guid: 90e65f5169c0174409cfdd56a09c13ce, type: 3}
@@ -2116,7 +2121,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: f7233a6415abe1f498eb18625dd3007e, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
