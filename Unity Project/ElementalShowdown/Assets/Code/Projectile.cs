@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum Element
 {
-    Fire, Ice, Wind
+    Fire, Ice, Lightning
 }
 public class Projectile : MonoBehaviour
 {
@@ -38,14 +38,18 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //if (collision.otherCollider.gameObject.GetComponent<>)
-        //{
+        Debug.Log("Collided with layer: " + collision.otherCollider.gameObject.layer);
+        if(collision.gameObject.layer == 8) // p1
+        {
+            GameplayLogic.DamagePlayer(1, Damage);
+        }
+        else if (collision.gameObject.layer == 9) // p2
+        {
+            GameplayLogic.DamagePlayer(2, Damage);
+        }
 
-        //}
-        //else
-        //{
-            Destroy(gameObject);
-        //}
+        GameplayLogic.SpawnPiece(Elemental);
+        Destroy(gameObject);
     }
 
     // Start is called before the first frame update

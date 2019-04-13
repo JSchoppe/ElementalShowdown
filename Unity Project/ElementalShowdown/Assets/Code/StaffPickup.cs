@@ -4,49 +4,50 @@ using UnityEngine;
 
 public class StaffPickup : MonoBehaviour
 {
-    static int totalShards = 9;
-    // Ice, Fire, Wind
-    static int[] shards = {3,3,3};
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        // Constantly tries to spawn random shard until there are no more shards left
-        while (totalShards > 0)
+    [SerializeField]
+    private SpriteRenderer renderer;
+
+    private Element assignedElement;
+    public Element elementType {
+        get
         {
-            // If random number is 1, spawns ice shard
-            if (Random.Range(1, 3) == 1)
+            return assignedElement;
+        }
+        set
+        {
+            switch (value)
             {
-                shards[1] -= 1;
-                totalShards--;
-            }
-            // If random number is 1, spawns ice shard
-            if (Random.Range(1, 3) == 2)
-            {
-                shards[2] -= 1;
-                totalShards--;
-            }
-            // If random number is 1, spawns ice shard
-            if (Random.Range(1, 3) == 3)
-            {
-                shards[3] -= 1;
-                totalShards--;
+                case Element.Fire:
+                    renderer.sprite = GameplayLogic.Fire;
+                    break;
+                case Element.Ice:
+                    renderer.sprite = GameplayLogic.Ice;
+                    break;
+                case Element.Lightning:
+                    renderer.sprite = GameplayLogic.Lightning;
+                    break;
+
             }
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+
+
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag.Equals ("Player"))
+        if (collision.gameObject.layer == 8) //p1
         {
-            // Code to put shit in inventory
-            Destroy(this);
+            GameplayLogic.playerCollectedElements[0].Add(elementType);
+            Destroy(gameObject);
+        }
+        else if (collision.gameObject.layer == 9) //p2
+        {
+            GameplayLogic.playerCollectedElements[1].Add(elementType);
+            Destroy(gameObject);
         }
     }
 }

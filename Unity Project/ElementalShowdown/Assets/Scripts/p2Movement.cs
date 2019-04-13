@@ -17,11 +17,6 @@ public class p2Movement : MonoBehaviour
     [SerializeField]
     private Transform gunTarget;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void FixedUpdate()
@@ -86,7 +81,7 @@ public class p2Movement : MonoBehaviour
             {
                 Projectile newProjectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity).GetComponent<Projectile>();
 
-                newProjectile.SetProperties(2, 15 * (gunTarget.position - transform.position), Element.Fire, 10);
+                newProjectile.SetProperties(2, 15 * (gunTarget.position - transform.position), Element.Fire, .10f);
             }
             onpress = true;
         }
