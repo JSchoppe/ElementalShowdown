@@ -86,9 +86,14 @@ public class p1Movement : MonoBehaviour
             {
                 List<Element> collectedElements = GameplayLogic.playerCollectedElements[0];
 
-                if (collectedElements.Count == 3)
+                if (collectedElements.Count > 2)
                 {
-                    if (collectedElements[0] == collectedElements[1] && collectedElements[1] == collectedElements[2])
+                    Debug.Log(collectedElements[0]);
+                    Debug.Log(collectedElements[1]);
+                    Debug.Log(collectedElements[2]);
+
+
+                    if (collectedElements[0] == collectedElements[1] && collectedElements[1] == collectedElements[2] && collectedElements[0] == collectedElements[2])
                     {    // all three elements are the same.
                         Projectile projectile1 = Instantiate(projectilePrefab, transform.position, Quaternion.identity).GetComponent<Projectile>();
                         projectile1.SetProperties(1, 45 * (gunTarget.position - transform.position), collectedElements[1], .30f);

@@ -16,7 +16,12 @@ public class p2Movement : MonoBehaviour
     private GameObject projectilePrefab;
     [SerializeField]
     private Transform gunTarget;
+    [SerializeField]
+    private Transform gunLeft;
+    [SerializeField]
+    private Transform gunRight;
 
+    bool onpress = false;
 
     // Update is called once per frame
     void FixedUpdate()
@@ -79,9 +84,57 @@ public class p2Movement : MonoBehaviour
         {
             if (!onpress)
             {
-                Projectile newProjectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity).GetComponent<Projectile>();
+                List<Element> collectedElements = GameplayLogic.playerCollectedElements[1];
 
-                newProjectile.SetProperties(2, 15 * (gunTarget.position - transform.position), Element.Fire, .10f);
+                if (collectedElements.Count > 2)
+                {
+                    Debug.Log(collectedElements[0]);
+                    Debug.Log(collectedElements[1]);
+                    Debug.Log(collectedElements[2]);
+
+
+                    if (collectedElements[0] == collectedElements[1] && collectedElements[1] == collectedElements[2] && collectedElements[0] == collectedElements[2])
+                    {    // all three elements are the same.
+                        Projectile projectile1 = Instantiate(projectilePrefab, transform.position, Quaternion.identity).GetComponent<Projectile>();
+                        projectile1.SetProperties(2, 45 * (gunTarget.position - transform.position), collectedElements[1], .30f);
+                    }
+                    else if (collectedElements[0] == collectedElements[1] || collectedElements[1] == collectedElements[2] || collectedElements[0] == collectedElements[2])
+                    {    // two of the elements are the same.
+                        if (collectedElements[0] != Element.Fire && collectedElements[1] != Element.Fire && collectedElements[2] != Element.Fire)
+                        { // ice and lightning
+                            Projectile projectile1 = Instantiate(projectilePrefab, transform.position, Quaternion.identity).GetComponent<Projectile>();
+                            Projectile projectile2 = Instantiate(projectilePrefab, transform.position, Quaternion.identity).GetComponent<Projectile>();
+                            projectile1.SetProperties(2, 30 * (gunRight.position - transform.position), Element.Ice, .20f);
+                            projectile2.SetProperties(2, 30 * (gunLeft.position - transform.position), Element.Lightning, .20f);
+                        }
+                        else if (collectedElements[0] != Element.Ice && collectedElements[1] != Element.Ice && collectedElements[2] != Element.Ice)
+                        { // fire and lightning
+                            Projectile projectile1 = Instantiate(projectilePrefab, transform.position, Quaternion.identity).GetComponent<Projectile>();
+                            Projectile projectile2 = Instantiate(projectilePrefab, transform.position, Quaternion.identity).GetComponent<Projectile>();
+                            projectile1.SetProperties(2, 30 * (gunRight.position - transform.position), Element.Fire, .20f);
+                            projectile2.SetProperties(2, 30 * (gunLeft.position - transform.position), Element.Lightning, .20f);
+                        }
+                        else if (collectedElements[0] != Element.Lightning && collectedElements[1] != Element.Lightning && collectedElements[2] != Element.Lightning)
+                        { // ice and fire
+                            Projectile projectile1 = Instantiate(projectilePrefab, transform.position, Quaternion.identity).GetComponent<Projectile>();
+                            Projectile projectile2 = Instantiate(projectilePrefab, transform.position, Quaternion.identity).GetComponent<Projectile>();
+                            projectile1.SetProperties(2, 30 * (gunRight.position - transform.position), Element.Ice, .20f);
+                            projectile2.SetProperties(2, 30 * (gunLeft.position - transform.position), Element.Fire, .20f);
+                        }
+                    }
+                    else // all projectiles are different.
+                    {
+                        Projectile projectile1 = Instantiate(projectilePrefab, transform.position, Quaternion.identity).GetComponent<Projectile>();
+                        Projectile projectile2 = Instantiate(projectilePrefab, transform.position, Quaternion.identity).GetComponent<Projectile>();
+                        Projectile projectile3 = Instantiate(projectilePrefab, transform.position, Quaternion.identity).GetComponent<Projectile>();
+                        projectile1.SetProperties(2, 15 * (gunTarget.position - transform.position), Element.Fire, .10f);
+                        projectile2.SetProperties(2, 15 * (gunLeft.position - transform.position), Element.Ice, .10f);
+                        projectile3.SetProperties(2, 15 * (gunRight.position - transform.position), Element.Lightning, .10f);
+                    }
+
+
+                    GameplayLogic.playerCollectedElements[1].Clear();
+                }
             }
             onpress = true;
         }
@@ -90,6 +143,4 @@ public class p2Movement : MonoBehaviour
             onpress = false;
         }
     }
-    bool onpress = false;
-
 }

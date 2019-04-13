@@ -29,25 +29,30 @@ public class StaffPickup : MonoBehaviour
                     break;
 
             }
+            assignedElement = value;
         }
     }
 
 
-
-
-
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.layer == 8) //p1
+        if (other.gameObject.layer == 8) //p1
         {
-            GameplayLogic.playerCollectedElements[0].Add(elementType);
-            Destroy(gameObject);
+            if (GameplayLogic.playerCollectedElements[0].Count < 4)
+            {
+                GameplayLogic.playerCollectedElements[0].Add(elementType);
+                GameplayLogic.SpawnPiece(elementType);
+                Destroy(gameObject);
+            }
         }
-        else if (collision.gameObject.layer == 9) //p2
+        else if (other.gameObject.layer == 9) //p2
         {
-            GameplayLogic.playerCollectedElements[1].Add(elementType);
-            Destroy(gameObject);
+            if (GameplayLogic.playerCollectedElements[1].Count < 4)
+            {
+                GameplayLogic.playerCollectedElements[1].Add(elementType);
+                GameplayLogic.SpawnPiece(elementType);
+                Destroy(gameObject);
+            }
         }
     }
 }

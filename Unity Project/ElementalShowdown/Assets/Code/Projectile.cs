@@ -29,6 +29,19 @@ public class Projectile : MonoBehaviour
                 gameObject.layer = 11;
                 break;
         }
+        switch (element)
+        {
+            case Element.Fire:
+                ProjectileImage.sprite = GameplayLogic.Fire;
+                break;
+            case Element.Ice:
+                ProjectileImage.sprite = GameplayLogic.Ice;
+                break;
+            case Element.Lightning:
+                ProjectileImage.sprite = GameplayLogic.Lightning;
+                break;
+        }
+
 
         Elemental = element;
         Damage = damage;
@@ -38,7 +51,6 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Collided with layer: " + collision.otherCollider.gameObject.layer);
         if(collision.gameObject.layer == 8) // p1
         {
             GameplayLogic.DamagePlayer(1, Damage);
@@ -47,8 +59,6 @@ public class Projectile : MonoBehaviour
         {
             GameplayLogic.DamagePlayer(2, Damage);
         }
-
-        GameplayLogic.SpawnPiece(Elemental);
         Destroy(gameObject);
     }
 
