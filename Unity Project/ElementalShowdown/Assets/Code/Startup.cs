@@ -25,6 +25,8 @@ public class Startup : MonoBehaviour
     private static AudioClip GameTrack;
     private static AudioClip EndTrack;
 
+    private static Track currentTrack = Track.Game;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,18 +42,22 @@ public class Startup : MonoBehaviour
 
     public static void ChangeAudioTrack(Track track)
     {
-        switch (track)
+        if (track != currentTrack)
         {
-            case Track.Game:
-                AudioPlayer.clip = GameTrack;
-                break;
-            case Track.Main:
-                AudioPlayer.clip = MainTrack;
-                break;
-            case Track.Victory:
-                AudioPlayer.clip = EndTrack;
-                break;
+            currentTrack = track;
+            switch (track)
+            {
+                case Track.Game:
+                    AudioPlayer.clip = GameTrack;
+                    break;
+                case Track.Main:
+                    AudioPlayer.clip = MainTrack;
+                    break;
+                case Track.Victory:
+                    AudioPlayer.clip = EndTrack;
+                    break;
+            }
+            AudioPlayer.Play();
         }
-        AudioPlayer.Play();
     }
 }

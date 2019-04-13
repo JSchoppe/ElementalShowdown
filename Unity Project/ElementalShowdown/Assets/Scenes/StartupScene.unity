@@ -144,7 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioPlayer: {fileID: 191188323}
   mainTrack: {fileID: 8300000, guid: 55c1d2e4cd9eabe4cb2015ed50f3647c, type: 3}
-  gameTrack: {fileID: 0}
+  gameTrack: {fileID: 8300000, guid: 50c4bd4acf68a3c43a363873d3b8fa8e, type: 3}
   endTrack: {fileID: 0}
 --- !u!4 &191188321
 Transform:
