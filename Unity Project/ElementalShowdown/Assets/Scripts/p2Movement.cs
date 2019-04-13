@@ -21,6 +21,9 @@ public class p2Movement : MonoBehaviour
     [SerializeField]
     private Transform gunRight;
 
+    [SerializeField]
+    private AudioSource playerSource;
+
     bool onpress = false;
 
     // Update is called once per frame
@@ -88,6 +91,9 @@ public class p2Movement : MonoBehaviour
 
                 if (collectedElements.Count > 2)
                 {
+                    playerSource.clip = Startup.GetRandomShootNoise();
+                    playerSource.Play();
+
                     Debug.Log(collectedElements[0]);
                     Debug.Log(collectedElements[1]);
                     Debug.Log(collectedElements[2]);

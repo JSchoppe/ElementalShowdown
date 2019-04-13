@@ -19,7 +19,16 @@ public class Startup : MonoBehaviour
     private AudioClip gameTrack;
     [SerializeField]
     private AudioClip endTrack;
+    [SerializeField]
+    private AudioClip[] shootNoises;
+    [SerializeField]
+    private AudioClip[] pickupNoises;
+    [SerializeField]
+    private AudioClip wandNoise;
 
+    public static AudioClip WandClip;
+    private static AudioClip[] PickupClips;
+    private static AudioClip[] ShootingClips;
     private static AudioSource AudioPlayer;
     private static AudioClip MainTrack;
     private static AudioClip GameTrack;
@@ -30,14 +39,27 @@ public class Startup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        WandClip = wandNoise;
+        PickupClips = pickupNoises;
         AudioPlayer = audioPlayer;
         MainTrack = mainTrack;
         GameTrack = gameTrack;
         EndTrack = endTrack;
+        ShootingClips = shootNoises;
 
         DontDestroyOnLoad(gameObject);
         // Load the main menu
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+    }
+
+    public static AudioClip GetRandomShootNoise()
+    {
+        return ShootingClips[Random.Range(0, ShootingClips.Length)];
+    }
+
+    public static AudioClip GetRandomPickupNoise()
+    {
+        return PickupClips[Random.Range(0, PickupClips.Length)];
     }
 
     public static void ChangeAudioTrack(Track track)
@@ -48,12 +70,15 @@ public class Startup : MonoBehaviour
             switch (track)
             {
                 case Track.Game:
+                    AudioPlayer.loop = true;
                     AudioPlayer.clip = GameTrack;
                     break;
                 case Track.Main:
+                    AudioPlayer.loop = true;
                     AudioPlayer.clip = MainTrack;
                     break;
                 case Track.Victory:
+                    AudioPlayer.loop = false;
                     AudioPlayer.clip = EndTrack;
                     break;
             }
